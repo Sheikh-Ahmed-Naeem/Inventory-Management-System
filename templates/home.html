@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        nav ul li .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #666;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        nav ul li .dropdown li a {
+            padding: 1rem;
+            color: white;
+        }
+
+        nav ul li .dropdown li a:hover {
+            background-color: #777;
+        }
+
+        nav ul li:hover .dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .highlight {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin-bottom: 15px;
+            padding: 0.5em;
+            text-align: left;
+        }
+
+        .content-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .content-section h2 {
+            margin-top: 0;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://source.unsplash.com/random');
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-details, .profile-links, .owner-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .contact-details h3, .profile-links h3, .owner-info h3 {
+            margin-top: 0;
+        }
+
+        .profile-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .profile-links ul li {
+            margin: 0.5rem 0;
+        }
+
+        .profile-links ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .profile-links ul li a:hover {
+            color: #ddd;
+        }
+
+        .owner-details {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .owner-details img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <header>
+        <h1>AMBASSADOR SPORTS</h1>
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="#">Football</a>
+                <ul class="dropdown">
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Makers</a></li>
+                    <li><a href="#">Order History</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gloves</a>
+                <ul class="dropdown">
+                    <li><a href="{{ url_for('product_window') }}">Products</a></li>
+                    <li><a href="G_maker_window.html">Makers</a></li>
+                    <li><a href="order_history.html">Order History</a></li>
+                </ul>
+            </li>
+            <li><a href="#inventory">Inventory</a></li>
+            <li><a href="#workers">Workers</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <div class="highlight">
+            <h2>Welcome to Ambassador Sports</h2>
+            <p>We are dedicated to providing the highest quality sports equipment. Explore our inventory and discover the best products tailored to your needs.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Our Mission</h2>
+            <p>At Ambassador Sports, our mission is to deliver top-quality sports equipment to athletes and sports enthusiasts around the world. We are committed to innovation, excellence, and customer satisfaction.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Latest Products</h2>
+            <p>Check out our latest products in the football and gloves categories. Stay ahead of the game with our newest arrivals.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Join Our Community</h2>
+            <p>Follow us on social media and join our community of sports enthusiasts. Stay updated with the latest news, events, and promotions.</p>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="contact-details">
+                <h3>Contact Us</h3>
+                <p><strong>Email:</strong> info@ambassadorsports.com</p>
+                <p><strong>Fax:</strong> +1-234-567-8901</p>
+                <p><strong>Phone:</strong> +1-234-567-8902</p>
+                <p><strong>Office:</strong> 1234 Sports Ave, Suite 100, Sportstown, SP 12345</p>
+            </div>
+            <div class="profile-links">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="https://linkedin.com/company/ambassadorsports" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://twitter.com/ambassadorsports" target="_blank">Twitter</a></li>
+                    <li><a href="https://facebook.com/ambassadorsports" target="_blank">Facebook</a></li>
+                </ul>
+            </div>
+            <div class="owner-info">
+                <h3>Owner</h3>
+                <div class="owner-details">
+                    <img src="ahmed.jpg" alt="Omer Sharif">
+                    <p>Omer Sharif (CEO)</p>
+                </div>
+                <div class="owner-details">
+                    <img src="ahmed.jpg" alt="Bilal Omer">
+                    <p>Bilal Omer (Manager)</p>
+                </div>
+            </div>
+        </div>
+        <p>&copy; 2024 Ambassador Sports. All rights reserved.</p>
+    </footer>
+</body>
+</html>

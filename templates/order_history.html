@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .order-history {
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 1000px;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .order-history h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .order-history table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-history table, .order-history th, .order-history td {
+            border: 1px solid #ddd;
+        }
+
+        .order-history th, .order-history td {
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .order-history th {
+            background-color: #f4f4f4;
+        }
+
+        .actions {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .actions a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            color: white;
+            background-color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .actions a:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AMBASSADOR SPORTS</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#order-history">Order History</a></li>
+            <li><a href="#inventory">Inventory</a></li>
+            <li><a href="#workers">Workers</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <div class="order-history" id="order-history">
+            <h2>Order History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Maker Name</th>
+                        <th>Total Products</th>
+                        <th>Delivered</th>
+                        <th>Pending</th>
+                        <th>Price per Product</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody id="order-history-body">
+                    <!-- Order history data will be inserted here dynamically -->
+                </tbody>
+            </table>
+            <div class="actions">
+                <a href="add_order_history.html">Add Order</a>
+                <a href="delete_order_history.html">Delete Order</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Inventory Management System. All rights reserved.</p>
+    </footer>
+    <script>
+        // Example data for demonstration
+        const orderHistoryData = [
+            { productName: 'Football', makerName: 'Maker A', total: 100, delivered: 50, pending: 50, pricePerProduct: 20 },
+            { productName: 'Gloves', makerName: 'Maker B', total: 200, delivered: 150, pending: 50, pricePerProduct: 10 },
+            { productName: 'Gloves', makerName: 'Maker B', total: 200, delivered: 150, pending: 50, pricePerProduct: 10 },
+            { productName: 'Gloves', makerName: 'Maker B', total: 200, delivered: 150, pending: 50, pricePerProduct: 10 },
+            { productName: 'Gloves', makerName: 'Maker B', total: 200, delivered: 150, pending: 50, pricePerProduct: 10 },
+            { productName: 'Gloves', makerName: 'Maker B', total: 200, delivered: 150, pending: 50, pricePerProduct: 10 }
+        ];
+
+        function loadOrderHistory() {
+            const tbody = document.getElementById('order-history-body');
+            tbody.innerHTML = ''; // Clear existing content
+
+            orderHistoryData.forEach(order => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td>${order.productName}</td>
+                    <td>${order.makerName}</td>
+                    <td>${order.total}</td>
+                    <td>${order.delivered}</td>
+                    <td>${order.pending}</td>
+                    <td>$${order.pricePerProduct}</td>
+                    <td>$${order.delivered * order.pricePerProduct}</td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Load order history on page load
+        window.onload = loadOrderHistory;
+    </script>
+</body>
+</html>

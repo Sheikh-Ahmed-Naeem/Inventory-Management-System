@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        nav ul li .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #666;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        nav ul li .dropdown li a {
+            padding: 1rem;
+            color: white;
+        }
+
+        nav ul li .dropdown li a:hover {
+            background-color: #777;
+        }
+
+        nav ul li:hover .dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://source.unsplash.com/random');
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .makers-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .maker {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: 300px;
+        }
+
+        .maker-details {
+            padding: 20px;
+        }
+
+        .maker-details h2 {
+            margin-top: 0;
+        }
+
+        .maker-details p {
+            margin: 5px 0;
+        }
+
+        .maker-image {
+            text-align: center;
+        }
+
+        .maker-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .button-container {
+            text-align: right;
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+
+        .sub-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sub-button:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #666;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 1rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #777;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+        footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.contact-details, .profile-links, .owner-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.contact-details h3, .profile-links h3, .owner-info h3 {
+    margin-top: 0;
+}
+
+.profile-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-links ul li {
+    margin: 0.5rem 0;
+}
+
+.profile-links ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.profile-links ul li a:hover {
+    color: #ddd;
+}
+
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <header>
+        <h1>AMBASSADOR SPORTS</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li>
+                <a href="#">Football</a>
+                <ul class="dropdown">
+                    <li><a href="#footballs">Footballs</a></li>
+                    <li><a href="#kits">Kits</a></li>
+                    <li><a href="#accessories">Accessories</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Gloves</a>
+                <ul class="dropdown">
+                    <li><a href="{{ url_for('product_window') }}">Products</a></li>
+                    <li><a href="G_maker_window.html">Maker</a></li>
+                    <li><a href="order_history.html">Order History</a></li>
+                </ul>
+            </li>
+            <li><a href="#inventory">Inventory</a></li>
+            <li><a href="#workers">Workers</a></li>
+            <li class="dropdown">
+                <a href="#">Actions</a>
+                <ul class="dropdown-menu">
+                    <li><a href="C_info.html">Add Maker</a></li>
+                    <li><a href="G_maker_Window_del.html">Delete Maker</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="makers-container">
+        <div class="maker">
+            <div class="maker-image">
+                <img src="https://via.placeholder.com/150" alt="Maker Image">
+            </div>
+            <div class="maker-details">
+                <h2>Maker 1</h2>
+                <p><strong>CNIC:</strong> 12345-6789012-3</p>
+                <p><strong>Address:</strong> ABC Street, XYZ Town</p>
+                <p><strong>Phone:</strong> +1234567890</p>
+            </div>
+        </div>
+        <div class="maker">
+            <div class="maker-image">
+                <img src="https://via.placeholder.com/150" alt="Maker Image">
+            </div>
+            <div class="maker-details">
+                <h2>Maker 2</h2>
+                <p><strong>CNIC:</strong> 09876-5432109-8</p>
+                <p><strong>Address:</strong> PQR Street, LMN Town</p>
+                <p><strong>Phone:</strong> +9876543210</p>
+            </div>
+        </div>
+        <div class="maker">
+            <div class="maker-image">
+                <img src="https://via.placeholder.com/150" alt="Maker Image">
+            </div>
+            <div class="maker-details">
+                <h2>Maker 2</h2>
+                <p><strong>CNIC:</strong> 09876-5432109-8</p>
+                <p><strong>Address:</strong> PQR Street, LMN Town</p>
+                <p><strong>Phone:</strong> +9876543210</p>
+            </div>
+        </div>
+        <div class="maker">
+            <div class="maker-image">
+                <img src="https://via.placeholder.com/150" alt="Maker Image">
+            </div>
+            <div class="maker-details">
+                <h2>Maker 2</h2>
+                <p><strong>CNIC:</strong> 09876-5432109-8</p>
+                <p><strong>Address:</strong> PQR Street, LMN Town</p>
+                <p><strong>Phone:</strong> +9876543210</p>
+            </div>
+        </div>
+        <div class="maker">
+            <div class="maker-image">
+                <img src="https://via.placeholder.com/150" alt="Maker Image">
+            </div>
+            <div class="maker-details">
+                <h2>Maker 2</h2>
+                <p><strong>CNIC:</strong> 09876-5432109-8</p>
+                <p><strong>Address:</strong> PQR Street, LMN Town</p>
+                <p><strong>Phone:</strong> +9876543210</p>
+            </div>
+        </div>
+        <!-- Add more maker details here -->
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="contact-details">
+                <h3>Contact Us</h3>
+                <p><strong>Email:</strong> info@ambassadorsports.com</p>
+                <p><strong>Fax:</strong> +1-234-567-8901</p>
+                <p><strong>Phone:</strong> +1-234-567-8902</p>
+                <p><strong>Office:</strong> 1234 Sports Ave, Suite 100, Sportstown, SP 12345</p>
+            </div>
+            <div class="profile-links">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="https://linkedin.com/company/ambassadorsports" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://twitter.com/ambassadorsports" target="_blank">Twitter</a></li>
+                    <li><a href="https://facebook.com/ambassadorsports" target="_blank">Facebook</a></li>
+                </ul>
+            </div>
+            <div class="owner-info">
+                <h3>Owner</h3>
+                <p>Omer Sharif (CEO)</p>
+                <p>Bilal Omer (Manger)</p>
+            </div>
+        </div>
+        <p>&copy; 2024 Ambassador Sports. All rights reserved.</p>
+    </footer>
+</body>
+</html>
