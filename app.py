@@ -9,7 +9,7 @@ app.secret_key = 'your_secret_key'  # Necessary for session management
 DATABASE = {
     'database': 'ambassador_sports',
     'user': 'postgres',
-    'password': 'Naeem@123',
+    'password': '********',
     'host': 'localhost',  # or the address of your database server
     'port': '5432'
 }
