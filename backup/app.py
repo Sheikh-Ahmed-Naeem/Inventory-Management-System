@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import psycopg2
 import psycopg2.extras
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Necessary for session management
@@ -9,7 +10,7 @@ app.secret_key = 'your_secret_key'  # Necessary for session management
 DATABASE = {
     'database': 'ambassador_sports',
     'user': 'postgres',
-    'password': '******',
+    'password': 'Naeem@123',
     'host': 'localhost',  # or the address of your database server
     'port': '5432'
 }
@@ -91,7 +92,6 @@ def logout():
     flash('You have been logged out.')
     return redirect(url_for('index'))
 
-
 @app.route('/G_product_window')
 def product_window():
     conn = get_db_connection()
@@ -105,6 +105,39 @@ def product_window():
     
     return render_template('G_product_window.html', products=products)
 
+@app.route('/P_info', methods=['GET', 'POST'])
+def add_product():
+    if request.method == 'POST':
+        p_name = request.form['p_name']
+        description = request.form['description']
+        size = request.form['size']  # Assuming this is a number
+        # image = request.files['product-image']
+
+        # if image:
+        #     image_filename = image.filename
+        #     image.save(os.path.join('static/images', image_filename))
+        #     image_url = url_for('static', filename=f'images/{image_filename}')
+        # else:
+        #     image_url = ''  # Handle the case where no image is uploaded
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute("INSERT INTO gloves (p_name, description, size) VALUES (%s, %s, %s)",
+                           (p_name, description, size))
+            conn.commit()
+            flash('Product added successfully!')
+            return redirect(url_for('product_window'))
+        except psycopg2.Error as e:
+            flash(f"Error adding product: {e}")  # Provide more specific error message
+            return redirect(url_for('product_window'))
+        finally:
+            cursor.close()
+            conn.close()
+
+    return render_template('P_info.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-
