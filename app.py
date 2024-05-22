@@ -137,7 +137,24 @@ def add_product():
             conn.close()
 
     return render_template('P_info.html')
+@app.route('/G_Product_del', methods=['POST'])
+def delete_product():
+    product_name = request.form['product_name']  # Assume this is passed from the form
 
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("DELETE FROM gloves WHERE p_name = %s", (product_name,))
+        conn.commit()
+        flash('Product deleted successfully!')
+    except psycopg2.Error as e:
+        flash(f"Error deleting product: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+    
+    return redirect(url_for('product_window'))
 
 if __name__ == '__main__':
     app.run(debug=True)
