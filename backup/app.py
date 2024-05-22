@@ -6,10 +6,10 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Necessary for session management
 
 # Configure the PostgreSQL connection
-DATABASE = { 
+DATABASE = {
     'database': 'ambassador_sports',
     'user': 'postgres',
-    'password': 'Naeem@123',
+    'password': '******',
     'host': 'localhost',  # or the address of your database server
     'port': '5432'
 }
@@ -107,3 +107,4 @@ def product_window():
 
 if __name__ == '__main__':
     app.run(debug=True)
+

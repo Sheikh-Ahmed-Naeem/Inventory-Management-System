@@ -238,7 +238,7 @@
     </header>
     <nav>
         <ul>
-            <li><a href="home.html">Home</a></li>
+            <li><a href="{{url_for('home')}}">Home</a></li>
             <li>
                 <a href="#">Football</a>
                 <ul class="dropdown">
@@ -260,7 +260,7 @@
             <li class="dropdown">
                 <a href="#">Actions</a>
                 <ul class="dropdown-menu">
-                    <li><a href="P_info.html">Add Product</a></li>
+                    <li><a href="{{url_for('add_product')}}">Add Product</a></li>
                     <li><a href="G_Product_del.html">Delete Product</a></li>
                 </ul>
             </li>

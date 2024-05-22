@@ -57,13 +57,22 @@
         <h1>Add Product</h1>
     </header>
     <div class="container">
-        <form>
-            <input type="text" placeholder="Product Name" required><br>
-            <input type="text" placeholder="Description" required><br>
-            <input type="text" placeholder="Price" required><br>
-            <input type="file" id="product-image" name="product-image" accept="image/*" required><br>
+        <form method="POST" enctype="multipart/form-data">  <input type="text" name="p_name" placeholder="Product Name" required><br>
+            <input type="text" name="description" placeholder="Description" required><br>
+            <input type="text" name="size" placeholder="size" required><br> 
+            <!-- <input type="file" id="product-image" name="product-image" accept="image/*" required><br> -->
             <button type="submit">Add Product</button>
-        </form>
-    </div>
-</body>
-</html>
+          </form>
+        </div>
+      
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+                <li class="message {{ message_level }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+      </body>
+      </html>
